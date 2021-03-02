@@ -19,15 +19,15 @@ DECLARE
              , ALL_CONSTRAINTS.constraint_type  AS constType
              , ALL_CONSTRAINTS.table_name       AS tabName
              , ALL_CONS_COLUMNS.column_name     AS colName
-             , ALL_CONSTRAINTS.SEARCH_CONDITION AS searchCond
+             , ALL_CONSTRAINTS.search_condition AS searchCond
         FROM ALL_CONSTRAINTS
                  JOIN ALL_CONS_COLUMNS ON ALL_CONS_COLUMNS.constraint_name = ALL_CONSTRAINTS.constraint_name
         WHERE ALL_CONSTRAINTS.constraint_type = 'C'
-          AND ALL_CONSTRAINTS.OWNER = q'[&entSchemeName]';
+          AND ALL_CONSTRAINTS.owner = q'[&entSchemeName]';
 
 BEGIN
     DBMS_OUTPUT.PUT_LINE(RPAD(schemeText, 8) || '' || RPAD(q'[&entSchemeName]', 32));
-    SELECT count(OWNER) INTO checkScheme FROM dba_tables WHERE OWNER = q'[&entSchemeName]';
+    SELECT count(owner) INTO checkScheme FROM dba_tables WHERE owner = q'[&entSchemeName]';
 
     IF checkScheme = 0 THEN
         RAISE noUser;

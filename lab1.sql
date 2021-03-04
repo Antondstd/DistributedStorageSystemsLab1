@@ -12,7 +12,7 @@ DECLARE
     num           number       := 1;
     schemeText    varchar2(8)  := 'Scheme: ';
     textNo        varchar2(16) := 'No.';
-    checkScheme   NUMBER       := 0;
+    checkScheme   number       := 0;
     noUser EXCEPTION;
     CURSOR RESULT IS
         SELECT ALL_CONSTRAINTS.constraint_name  AS const_name
